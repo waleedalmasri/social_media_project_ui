@@ -39,8 +39,7 @@ export default function Header() {
         <Link to={'profile'}>
           <Tab label={'Profile'}/>
         </Link>
-
-        <Grid container spacing={1} alignItems="flex-end" justify={'center'}>
+        <Grid className={'search-box'} container spacing={1} alignItems="flex-end" justify={'center'}>
           <Grid item>
             <SearchIcon/>
           </Grid>
@@ -48,9 +47,12 @@ export default function Header() {
             <TextField label="Search" margin={'dense'}/>
           </Grid>
         </Grid>
-
-        <Button variant="outlined" color="secondary" size={'large'} fullWidth={false}>Sign Out</Button>
-
+        <Link to={'sign-in'}>
+          <Tab label={'sign in'}/>
+        </Link>
+        <Link to={'sign-in'}>
+          <Tab label={'sign up'}/>
+        </Link>
       </Tabs>
     </Paper>
   );
