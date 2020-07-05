@@ -4,13 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { I18nextProvider } from 'react-i18next';
-import  {i18next} from './i18n';
+import { i18next } from './i18n';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={<div>Loading...</div>}>
       <I18nextProvider i18n={i18next}>
-        <App/>
+        <Provider store={store}>
+          <App />
+        </Provider>
       </I18nextProvider>
     </React.Suspense>
   </React.StrictMode>,

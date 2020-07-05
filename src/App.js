@@ -7,7 +7,6 @@ import SignInForm from './components/SignInForm';
 import PrivateRoute from './components/PrivateRoute';
 import { Route } from 'react-router';
 
-
 function App() {
   return (
     <div className="App">
