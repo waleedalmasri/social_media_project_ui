@@ -7,15 +7,19 @@ import { I18nextProvider } from 'react-i18next';
 import { i18next } from './i18n';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theming/themes';
 
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={<div>Loading...</div>}>
-      <I18nextProvider i18n={i18next}>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </I18nextProvider>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18next}>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </I18nextProvider>
+      </Provider>
     </React.Suspense>
   </React.StrictMode>,
   document.getElementById('root')
