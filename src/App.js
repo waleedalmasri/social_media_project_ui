@@ -6,6 +6,7 @@ import Profile from './components/Profile';
 import SignInForm from './components/SignInForm';
 import PrivateRoute from './components/PrivateRoute';
 import { Route } from 'react-router';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Switch>
           <Route path={'/sign-in'} component={SignInForm}></Route>
+          <Route path={'/sign-up'} component={SignUpForm}></Route>
           <PrivateRoute path={'/profile'} component={Profile}></PrivateRoute>
           <PrivateRoute path={'/'} component={Home}></PrivateRoute>
         </Switch>

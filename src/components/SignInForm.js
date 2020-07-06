@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import { useTranslation } from 'react-i18next';
 import logIn from '../redux/actions/LogIn';
 import { useDispatch } from 'react-redux';
 import store from '../redux/store';
@@ -20,7 +19,6 @@ export default function LogInForm() {
     password: Yup.string().required('Required'),
   });
 
-  //const { t } = useTranslation();
   store.subscribe(() => {
     console.log(store.getState());
   });

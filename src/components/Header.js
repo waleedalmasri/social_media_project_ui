@@ -49,7 +49,7 @@ export default function Header() {
         <Link to={'sign-in'}>
           <Tab label={'sign in'}/>
         </Link>
-        <Link to={'sign-in'}>
+        <Link to={'sign-up'}>
           <Tab label={'sign up'}/>
         </Link>
       </Tabs>
