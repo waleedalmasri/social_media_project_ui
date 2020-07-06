@@ -1,4 +1,4 @@
-const IsLoggedIn = (
+const AuthReducer = (
   state = {
     isLoggedIn: false,
     userName: '',
@@ -9,6 +9,15 @@ const IsLoggedIn = (
   action
 ) => {
   switch (action.type) {
+    case 'SIGNUP':
+      return {
+        ...state,
+        isLoggedIn: true,
+        userName: action.payload.username,
+        fullName: action.payload.fullname,
+        email: action.payload.email,
+        bio: action.payload.bio,
+      };
     case 'LOGIN':
       return {
         //should be filled with user information in real case
@@ -26,4 +35,4 @@ const IsLoggedIn = (
   }
 };
 
-export default IsLoggedIn;
+export default AuthReducer;

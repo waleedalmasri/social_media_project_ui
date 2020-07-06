@@ -40,8 +40,9 @@ export default function SignUpForm() {
       alignItems="center"
       justifyContent="center"
       mx="auto"
-      mt={8}
-      display={'flex'}
+      mt={15}
+      width={{ xs: 200, sm: 300, md: 500, lg: 700, xl: 1500 }}
+      display={'block'}
     >
       <Card raised={true}>
         <CardContent>
@@ -57,6 +58,7 @@ export default function SignUpForm() {
             validationSchema={SignUpSchema}
             onSubmit={(values, { setSubmitting }) => {
               dispatch(SignUp(values));
+              setSubmitting(false);
             }}
           >
             {({
@@ -67,7 +69,6 @@ export default function SignUpForm() {
               handleBlur,
               handleSubmit,
               isSubmitting,
-              /* and other goodies */
             }) => (
               <form onSubmit={handleSubmit}>
                 <InputLabel color={'primary'} variant={'standard'}>
@@ -81,8 +82,8 @@ export default function SignUpForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={errors.email && touched.email && errors.email}
-                  helperText={'Email should be valid'}
+                  error={errors.email && touched.email}
+                  helperText={errors.email}
                 />
                 <br />
                 <TextField
@@ -93,8 +94,8 @@ export default function SignUpForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
-                  error={errors.password && touched.password && errors.password}
-                  helperText={'Password Required'}
+                  error={errors.password && touched.password}
+                  helperText={errors.password}
                 />
                 <br />
                 <TextField
@@ -105,12 +106,8 @@ export default function SignUpForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.confirmpassword}
-                  error={
-                    errors.confirmpassword &&
-                    touched.confirmpassword &&
-                    errors.confirmpassword
-                  }
-                  helperText={'Passwords must be matched'}
+                  error={errors.confirmpassword && touched.confirmpassword}
+                  helperText={errors.confirmpassword}
                 />
 
                 <br />
@@ -122,8 +119,8 @@ export default function SignUpForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.username}
-                  error={errors.username && touched.username && errors.username}
-                  helperText={'8 characters at least'}
+                  error={errors.username && touched.username}
+                  helperText={errors.username}
                 />
                 <br />
                 <TextField
@@ -134,8 +131,8 @@ export default function SignUpForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.fullname}
-                  error={errors.fullname && touched.fullname && errors.fullname}
-                  helperText={'8 characters at least'}
+                  error={errors.fullname && touched.fullname}
+                  helperText={errors.fullname}
                 />
 
                 <br />
@@ -147,9 +144,10 @@ export default function SignUpForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.bio}
-                  error={errors.bio && touched.bio && errors.bio}
-                  helperText={'5-50 Characters'}
+                  error={errors.bio && touched.bio}
+                  helperText={errors.bio}
                 />
+                <br />
                 <CardActions>
                   <Button
                     margin={'dense'}
@@ -157,6 +155,7 @@ export default function SignUpForm() {
                     variant={'contained'}
                     color="primary"
                     size={'small'}
+                    disabled={isSubmitting}
                   >
                     Sign Up
                   </Button>
