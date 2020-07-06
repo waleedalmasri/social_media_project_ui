@@ -13,13 +13,13 @@ import theme from './theming/themes';
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={<div>Loading...</div>}>
-      <Provider store={store}>
         <I18nextProvider i18n={i18next}>
           <ThemeProvider theme={theme}>
+            <Provider store={store}>
             <App />
+            </Provider>
           </ThemeProvider>
         </I18nextProvider>
-      </Provider>
     </React.Suspense>
   </React.StrictMode>,
   document.getElementById('root')
