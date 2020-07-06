@@ -1,18 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Header from './components/Header';
+import './App.css';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Profile from './components/Profile';
+import SignInForm from './components/SignInForm';
+import PrivateRoute from './components/PrivateRoute';
+import { Route } from 'react-router';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Header/>
         <Switch>
-          <Route path={'/'} exact component={Home}></Route>
-          <Route path={'/profile'} component={Profile}></Route>
-          <Redirect to={'/'}></Redirect>
+          <Route path={'/sign-in'} component={SignInForm}></Route>
+          <PrivateRoute path={'/profile'} component={Profile}></PrivateRoute>
+          <PrivateRoute path={'/'} component={Home}></PrivateRoute>
         </Switch>
       </Router>
     </div>

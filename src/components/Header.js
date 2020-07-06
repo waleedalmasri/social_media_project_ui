@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
@@ -39,8 +38,7 @@ export default function Header() {
         <Link to={'profile'}>
           <Tab label={'Profile'}/>
         </Link>
-
-        <Grid container spacing={1} alignItems="flex-end" justify={'center'}>
+        <Grid className={'search-box'} container spacing={1} alignItems="flex-end" justify={'center'}>
           <Grid item>
             <SearchIcon/>
           </Grid>
@@ -48,9 +46,12 @@ export default function Header() {
             <TextField label="Search" margin={'dense'}/>
           </Grid>
         </Grid>
-
-        <Button variant="outlined" color="secondary" size={'large'} fullWidth={false}>Sign Out</Button>
-
+        <Link to={'sign-in'}>
+          <Tab label={'sign in'}/>
+        </Link>
+        <Link to={'sign-in'}>
+          <Tab label={'sign up'}/>
+        </Link>
       </Tabs>
     </Paper>
   );
