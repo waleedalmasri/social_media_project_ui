@@ -20,13 +20,12 @@ const AuthReducer = (
       };
     case 'LOGIN':
       return {
-        //should be filled with user information in real case
         ...state,
         isLoggedIn: true,
-        userName: 'waleed',
-        fullName: 'Waleed Almasri',
-        email: 'waleedalmsri.061@gmail.com',
-        bio: 'Average Joe',
+        userName: action.payload.username,
+        fullName: action.payload.fullname,
+        email: action.payload.email,
+        bio: action.payload.bio,
       };
     default:
       return {

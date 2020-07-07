@@ -1,11 +1,12 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import Header from './Header';
+import store from '../redux/store';
 
 
 export default function PrivateRoute(props) {
   //simulate authenticated status)
-  if (true) {
+  if (store.getState()['Auth']['isLoggedIn']) {
     return (
       <div>
         <Header/>

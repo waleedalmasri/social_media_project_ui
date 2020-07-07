@@ -10,9 +10,12 @@ import CardContent from '@material-ui/core/CardContent';
 import logIn from '../redux/actions/LogIn';
 import { useDispatch } from 'react-redux';
 import store from '../redux/store';
+import Box from '@material-ui/core/Box';
+import { useHistory } from 'react-router';
 
 export default function LogInForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const SignInSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
@@ -20,18 +23,26 @@ export default function LogInForm() {
   });
 
   store.subscribe(() => {
-    console.log(store.getState());
+    history.replace('/');
   });
 
   return (
+    <Box
+      alignItems="center"
+      justifyContent="center"
+      mx="auto"
+      mt={15}
+      width={{ xs: 200, sm: 300, md: 500, lg: 700, xl: 1500 }}
+      display={'block'}
+    >
       <Card raised={true}>
         <CardContent>
           <Formik
             initialValues={{ email: '', password: '' }}
             validationSchema={SignInSchema}
             onSubmit={(values, { setSubmitting }) => {
-              //before dispatch action we should check if authinticated in real cases
-              dispatch(logIn());
+              dispatch(logIn(values));
+              setSubmitting(false);
             }}
           >
             {({
@@ -56,8 +67,8 @@ export default function LogInForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={errors.email && touched.email && errors.email}
-                  helperText={'Email should be valid'}
+                  error={errors.email && touched.email}
+                  helperText={errors.email}
                 />
                 <br />
                 <TextField
@@ -68,8 +79,8 @@ export default function LogInForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
-                  error={errors.password && touched.password && errors.password}
-                  helperText={'Password Required'}
+                  error={errors.password && touched.password}
+                  helperText={errors.password}
                 />
                 <br />
                 <CardActions>
@@ -79,6 +90,7 @@ export default function LogInForm() {
                     variant={'contained'}
                     color="primary"
                     size={'small'}
+                    disabled={isSubmitting}
                   >
                     Sign In
                   </Button>
@@ -88,5 +100,6 @@ export default function LogInForm() {
           </Formik>
         </CardContent>
       </Card>
+    </Box>
   );
 }
