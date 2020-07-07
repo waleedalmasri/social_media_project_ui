@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -8,23 +8,24 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import logIn from '../redux/actions/LogIn';
-import { useDispatch } from 'react-redux';
-import store from '../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router';
 
 export default function LogInForm() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const authed = useSelector((state) => state.Auth.isLoggedIn);
 
   const SignInSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().required('Required'),
   });
 
-  store.subscribe(() => {
+  useEffect(() => {
+    if (!authed) return;
     history.replace('/');
-  });
+  }, [authed, history]);
 
   return (
     <Box

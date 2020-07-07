@@ -1,12 +1,14 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import Header from './Header';
-import store from '../redux/store';
+import { useSelector } from 'react-redux';
 
 
 export default function PrivateRoute(props) {
-  //simulate authenticated status)
-  if (store.getState()['Auth']['isLoggedIn']) {
+
+  const authed=useSelector(state=>state.Auth.isLoggedIn);
+
+  if (authed) {
     return (
       <div>
         <Header/>
