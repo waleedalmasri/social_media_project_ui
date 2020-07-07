@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: ''
+  baseURL: 'https://socialmediaui-90f8b.firebaseio.com/'
 
 });
 
