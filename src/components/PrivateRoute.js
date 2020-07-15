@@ -8,7 +8,7 @@ export default function PrivateRoute(props) {
 
   const authed=useSelector(state=>state.Auth.isLoggedIn);
 
-  if (authed) {
+  if (true) {
     return (
       <div>
         <Header/>
