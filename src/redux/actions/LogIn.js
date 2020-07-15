@@ -1,12 +1,27 @@
-const logIn=()=>{
-    return dispatch => {
-      //This time out simulate an fetch data from an api (ex :using axios )
-      //this Async action handled bu thunk middleware lib
-      setTimeout( ()=>{
-        dispatch({
-          type:'LOGIN'
-        });
-      },2000 );
-    }
+import axios_config from '../../axios_service/axios_config';
+
+const logIn = (User) => {
+  return (dispatch) => {
+    axios_config.get('/user.json').then((res) => {
+      const users = res.data;
+      const indeces = Object.keys(users);
+
+      for (let i = 0; i < indeces.length; i++) {
+        const authedUser = users[indeces[i]]['User'];
+        const authedEmail = authedUser['email'];
+        const authedPassword = authedUser['password'];
+        if (User.email === authedEmail && User.password === authedPassword) {
+          console.log('Authed');
+          dispatch({
+            type: 'LOGIN',
+            payload: authedUser,
+          });
+          return;
+        }
+      }
+      alert('Invalid User');
+      return;
+    });
+  };
 };
-export default logIn ;
+export default logIn;
