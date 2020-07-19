@@ -3,24 +3,21 @@ import { Redirect, Route } from 'react-router-dom';
 import Header from './Header';
 import { useSelector } from 'react-redux';
 
-
 export default function PrivateRoute(props) {
-
-  const authed=useSelector(state=>state.Auth.isLoggedIn);
+  const authed = useSelector((state) => state.Auth.isLoggedIn);
 
   if (true) {
     return (
       <div>
-        <Header/>
-        <Route {...props}/>
+        <Header />
+        <Route {...props} />
       </div>
     );
   } else {
     return (
       <div>
-        <Redirect to={'/sign-in'}/>
+        <Redirect to={'/sign-in'} />
       </div>
     );
   }
-
 }

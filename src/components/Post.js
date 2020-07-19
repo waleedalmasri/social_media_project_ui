@@ -15,8 +15,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatIcon from '@material-ui/icons/Chat';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Badge from '@material-ui/core/Badge';
+import { useSelector } from 'react-redux';
 
-export default function Post() {
+export default function Post(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 345,
@@ -41,19 +43,20 @@ export default function Post() {
       backgroundColor: red[500],
     },
   }));
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  const fullName = useSelector((state) => state.Auth.fullName);
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {fullName.charAt(0)}
           </Avatar>
         }
         action={
@@ -61,25 +64,29 @@ export default function Post() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="User Full Name"
-        subheader="September 14, 2016"
+        title={fullName}
+        subheader={props.post.publishDate}
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
+        image={props.post.imageURL}
+        title={props.post.imageName}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Post Body
+          {props.post.postContent}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <Badge badgeContent={props.post.likes}>
+            <FavoriteIcon />
+          </Badge>
         </IconButton>
         <IconButton aria-label="share">
-          <ChatIcon />
+          <Badge badgeContent={props.post.comments.split(' ').length}>
+            <ChatIcon />
+          </Badge>
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
